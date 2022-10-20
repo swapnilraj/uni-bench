@@ -58,8 +58,8 @@ func __setup__{
     %{ ids.token0_address = context.token0 %}
     %{ ids.token1_address = context.token1 %}
 
-     Pool.setValues_8ff8bcfb(pool_address, token0_address, token1_address, 500, 10);
-     Pool.initialize_f637731d(pool_address, 0x01000000000000000000000000);
+     Pool.setValues_8ff8bcfb(pool_address, token0_address, token1_address, 3000, 60);
+     Pool.initialize_f637731d(pool_address, 0x01000276a3);
 
     return ();
 }
@@ -79,7 +79,7 @@ func test_swap{
     let (d : felt*) = alloc();
     let amount = Uint256(low= 0x0de0b6b3a7640000, high=0);
 
-    Pool.swap_128acb08(pool_address, TO, 0, amount, 0xfffd8963efd1fc6a506488495d951d5263988d25, 0 , d);
+    Pool.swap_128acb08(pool_address, TO, 0, amount, 0x016a09e667f3bcc908b2fb1366, 0 , d);
 
     return ();
 }
