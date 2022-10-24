@@ -14,12 +14,11 @@ from starkware.cairo.common.dict import dict_write, dict_read
 from starkware.cairo.common.dict_access import DictAccess
 from starkware.cairo.common.uint256 import (
     Uint256,
-    uint256_sub,
     uint256_add,
     uint256_le,
     uint256_lt,
-    uint256_mul,
 )
+from warplib.maths.mul_improved import uint256_mul, uint256_unsigned_div_rem, uint256_sub, uint256_mul_div_mod
 from starkware.cairo.common.alloc import alloc
 from warplib.maths.utils import narrow_safe, felt_to_uint256
 from starkware.cairo.common.math import split_felt
@@ -13482,58 +13481,68 @@ namespace UniswapV3Pool {
         __warp_usrid_00_a: Uint256, __warp_usrid_01_b: Uint256, __warp_usrid_02_denominator: Uint256
     ) -> (__warp_usrid_03_result: Uint256) {
         alloc_locals;
-
-        let __warp_usrid_03_result = Uint256(low=0, high=0);
-
-        let __warp_usrid_04_prod0 = Uint256(low=0, high=0);
-
-        let (__warp_se_1362) = warp_mul_unsafe256(__warp_usrid_00_a, __warp_usrid_01_b);
-
-        let __warp_usrid_04_prod0 = __warp_se_1362;
-
-        let (__warp_usrid_05_mm) = warp_mulmod(
-            __warp_usrid_00_a,
-            __warp_usrid_01_b,
-            Uint256(low=340282366920938463463374607431768211455, high=340282366920938463463374607431768211455),
-        );
-
-        let __warp_usrid_06_prod1 = Uint256(low=0, high=0);
-
-        let (__warp_se_1363) = warp_sub_unsafe256(__warp_usrid_05_mm, __warp_usrid_04_prod0);
-
-        let __warp_usrid_06_prod1 = __warp_se_1363;
-
-        let (__warp_se_1364) = warp_lt256(__warp_usrid_05_mm, __warp_usrid_04_prod0);
-
-        if (__warp_se_1364 != 0) {
-            let (__warp_se_1365) = warp_sub_unsafe256(
-                __warp_usrid_06_prod1, Uint256(low=1, high=0)
-            );
-
-            let __warp_usrid_06_prod1 = __warp_se_1365;
-
-            let (__warp_se_1366) = mulDiv_aa9a0912_if_part1(
-                __warp_usrid_06_prod1,
-                __warp_usrid_02_denominator,
-                __warp_usrid_03_result,
-                __warp_usrid_04_prod0,
-                __warp_usrid_00_a,
-                __warp_usrid_01_b,
-            );
-
-            return (__warp_se_1366,);
-        } else {
-            let (__warp_se_1367) = mulDiv_aa9a0912_if_part1(
-                __warp_usrid_06_prod1,
-                __warp_usrid_02_denominator,
-                __warp_usrid_03_result,
-                __warp_usrid_04_prod0,
-                __warp_usrid_00_a,
-                __warp_usrid_01_b,
-            );
-
-            return (__warp_se_1367,);
+    if (__warp_usrid_02_denominator.high + __warp_usrid_02_denominator.low == 0) {
+        with_attr error_message("Modulo by zero error") {
+            assert 1 = 0;
         }
+    }
+        let (quotient_low, quotient_high, _) = uint256_mul_div_mod(__warp_usrid_00_a, __warp_usrid_01_b, __warp_usrid_02_denominator);
+
+        assert quotient_high.low = 0;
+        assert quotient_high.high = 0;
+
+        return (quotient_low,);
+//        let __warp_usrid_03_result = Uint256(low=0, high=0);
+//
+//        let __warp_usrid_04_prod0 = Uint256(low=0, high=0);
+//
+//        let (__warp_se_1362) = warp_mul_unsafe256(__warp_usrid_00_a, __warp_usrid_01_b);
+//
+//        let __warp_usrid_04_prod0 = __warp_se_1362;
+//
+//        let (__warp_usrid_05_mm) = warp_mulmod(
+//            __warp_usrid_00_a,
+//            __warp_usrid_01_b,
+//            Uint256(low=340282366920938463463374607431768211455, high=340282366920938463463374607431768211455),
+//        );
+//
+//        let __warp_usrid_06_prod1 = Uint256(low=0, high=0);
+//
+//        let (__warp_se_1363) = warp_sub_unsafe256(__warp_usrid_05_mm, __warp_usrid_04_prod0);
+//
+//        let __warp_usrid_06_prod1 = __warp_se_1363;
+//
+//        let (__warp_se_1364) = warp_lt256(__warp_usrid_05_mm, __warp_usrid_04_prod0);
+//
+//        if (__warp_se_1364 != 0) {
+//            let (__warp_se_1365) = warp_sub_unsafe256(
+//                __warp_usrid_06_prod1, Uint256(low=1, high=0)
+//            );
+//
+//            let __warp_usrid_06_prod1 = __warp_se_1365;
+//
+//            let (__warp_se_1366) = mulDiv_aa9a0912_if_part1(
+//                __warp_usrid_06_prod1,
+//                __warp_usrid_02_denominator,
+//                __warp_usrid_03_result,
+//                __warp_usrid_04_prod0,
+//                __warp_usrid_00_a,
+//                __warp_usrid_01_b,
+//            );
+//
+//            return (__warp_se_1366,);
+//        } else {
+//            let (__warp_se_1367) = mulDiv_aa9a0912_if_part1(
+//                __warp_usrid_06_prod1,
+//                __warp_usrid_02_denominator,
+//                __warp_usrid_03_result,
+//                __warp_usrid_04_prod0,
+//                __warp_usrid_00_a,
+//                __warp_usrid_01_b,
+//            );
+//
+//            return (__warp_se_1367,);
+//        }
     }
 
     func mulDiv_aa9a0912_if_part1{range_check_ptr: felt, bitwise_ptr: BitwiseBuiltin*}(

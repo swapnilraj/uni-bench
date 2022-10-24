@@ -2,6 +2,7 @@
 from starkware.cairo.common.bitwise import bitwise_and
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 from starkware.cairo.common.uint256 import Uint256, uint256_signed_div_rem
+from warplib.maths.mul_improved import uint256_mul, uint256_unsigned_div_rem, uint256_sub, uint256_mul_div_mod
 from warplib.maths.utils import felt_to_uint256
 from warplib.maths.int_conversions import (
     warp_int8_to_int256,

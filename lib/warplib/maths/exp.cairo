@@ -1,7 +1,8 @@
 // AUTO-GENERATED
 from starkware.cairo.common.bitwise import bitwise_and
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
-from starkware.cairo.common.uint256 import Uint256, uint256_sub
+from starkware.cairo.common.uint256 import Uint256
+from warplib.maths.mul_improved import uint256_mul, uint256_unsigned_div_rem, uint256_sub
 from warplib.maths.mul import (
     warp_mul8,
     warp_mul16,
