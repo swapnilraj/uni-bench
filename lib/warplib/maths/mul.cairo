@@ -1,5 +1,6 @@
 // AUTO-GENERATED
-from starkware.cairo.common.uint256 import Uint256, uint256_mul
+from starkware.cairo.common.uint256 import Uint256
+from warplib.maths.mul_improved import uint256_mul, uint256_unsigned_div_rem, uint256_sub
 from starkware.cairo.common.math_cmp import is_le_felt
 from warplib.maths.ge import warp_ge256
 from warplib.maths.utils import felt_to_uint256

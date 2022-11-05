@@ -2,7 +2,8 @@
 from starkware.cairo.common.bitwise import bitwise_and
 from starkware.cairo.common.cairo_builtins import BitwiseBuiltin
 from starkware.cairo.common.math_cmp import is_le_felt
-from starkware.cairo.common.uint256 import Uint256, uint256_mul, uint256_cond_neg, uint256_signed_nn
+from starkware.cairo.common.uint256 import Uint256, uint256_cond_neg, uint256_signed_nn
+from warplib.maths.mul_improved import uint256_mul, uint256_unsigned_div_rem, uint256_sub
 from warplib.maths.mul_unsafe import (
     warp_mul_unsafe8,
     warp_mul_unsafe16,
