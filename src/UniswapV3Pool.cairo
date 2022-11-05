@@ -14332,6 +14332,33 @@ namespace UniswapV3Pool{
 
     }
 
+func setValues_8ff8bcfb{
+    syscall_ptr: felt*,
+    pedersen_ptr: HashBuiltin*,
+    range_check_ptr: felt,
+    bitwise_ptr: BitwiseBuiltin*,
+}(
+    __warp_usrid_050__token0: felt,
+    __warp_usrid_051__token1: felt,
+    __warp_usrid_052__fee: felt,
+    __warp_usrid_053__tickSpacing: felt,
+) -> () {
+    alloc_locals;
+    warp_external_input_check_int24(__warp_usrid_053__tickSpacing);
+    warp_external_input_check_int24(__warp_usrid_052__fee);
+    warp_external_input_check_address(__warp_usrid_051__token1);
+    warp_external_input_check_address(__warp_usrid_050__token0);
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_033_factory, 0);
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_034_token0, __warp_usrid_050__token0);
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_035_token1, __warp_usrid_051__token1);
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_036_fee, __warp_usrid_052__fee);
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_037_tickSpacing, __warp_usrid_053__tickSpacing);
+    let (__warp_se_616) = UniswapV3Pool.tickSpacingToMaxLiquidityPerTick_82c66f87(
+        __warp_usrid_053__tickSpacing
+    );
+    WS_WRITE0(UniswapV3Pool.__warp_usrid_038_maxLiquidityPerTick, __warp_se_616);
+    return ();
+}
 
 // Contract Def IUniswapV3Factory@interface
 
