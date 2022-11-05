@@ -50,9 +50,9 @@ func __setup__{
     tempvar pool_address;
     tempvar token0_address;
     tempvar token1_address;
-    %{ context.token0 = deploy_contract("./src/TestERC20__WC__TestERC20.cairo", [100000000, 10000000000000]).contract_address %}
-    %{ context.token1 = deploy_contract("./src/TestERC20__WC__TestERC20.cairo", [100000000, 10000000000000]).contract_address %}
-    %{ context.pool = deploy_contract("./src/UniswapV3Pool__WC__UniswapV3Pool.cairo").contract_address %}
+    %{ context.token0 = deploy_contract("./src/TestERC20.cairo", [100000000, 10000000000000]).contract_address %}
+    %{ context.token1 = deploy_contract("./src/TestERC20.cairo", [100000000, 10000000000000]).contract_address %}
+    %{ context.pool = deploy_contract("./src/UniswapV3Pool.cairo").contract_address %}
     //%{ context.factory = deploy_contract("./src/UniswapV3Factory__WC__UniswapV3Factory.cairo").contract_address %}
     %{ ids.pool_address = context.pool %}
     %{ ids.token0_address = context.token0 %}
