@@ -14332,6 +14332,7 @@ namespace UniswapV3Pool{
 
     }
 
+@external
 func setValues_8ff8bcfb{
     syscall_ptr: felt*,
     pedersen_ptr: HashBuiltin*,
